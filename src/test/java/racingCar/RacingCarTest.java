@@ -13,7 +13,7 @@ public class RacingCarTest {
     @DisplayName("자동차 이동 테스트")
     @ValueSource(ints = {1, 9})
     public void testMove(int input) {
-        RacingCar car = new RacingCar();
+        RacingCar car = new RacingCar(new CarName("pobi"));
         for (int i = 0; i < input; i++) {
             car.move();
         }
@@ -23,7 +23,7 @@ public class RacingCarTest {
     @Test
     @DisplayName("자동차 초기 위치 테스트")
     public void testInitialGo() {
-        RacingCar car = new RacingCar();
+        RacingCar car = new RacingCar(new CarName("pobi"));
         assertEquals(0, car.getGo());
     }
 }

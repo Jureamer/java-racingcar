@@ -1,11 +1,28 @@
 package racingCar;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputScanner {
     public static final int LIMIT_CAR_COUNT = 9;
     private static final int LIMIT_RACING_COUNT = 9;
+    private static final String CAR_NAME_DELIMITER = ",";
     Scanner scanner = new Scanner(System.in);
+    public List<CarName> getCarNames() {
+        System.out.println("경주할 자동차 이름을 입력하세요(이름은 쉼표(,)를 기준으로 구분).");
+        String input = scanner.nextLine();
+        String[] carNamesArray = input.split(CAR_NAME_DELIMITER);
+        List<CarName> carNames = new ArrayList<>();
+
+        for (String name : carNamesArray) {
+            carNames.add(new CarName(name));
+        }
+
+        checkProperCarCount(carNames.size());
+        return carNames;
+    }
+
     public int getCarCount() {
         System.out.println("자동차 대수는 몇 대인가요?");
         String input = scanner.nextLine();

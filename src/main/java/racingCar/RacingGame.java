@@ -10,32 +10,27 @@ public class RacingGame {
     private static ResultViewer resultViewer = new ResultViewer();
     private static RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
     public static void main(String[] args) {
-
-        int carCount = inputScanner.getCarCount();
+        List<CarName> carNames = inputScanner.getCarNames();
         int racingCount = inputScanner.getRacingCount();
-        List<RacingCar> racingCars = createRacingCars(carCount);
+        RacingCars racingCars = createRacingCars(carNames);
         startRacing(racingCars, racingCount);
     }
 
-    private static void startRacing(List<RacingCar> racingCars, int racingCount) {
+    private static void startRacing(RacingCars racingCars, int racingCount) {
+        System.out.println("실행 결과");
         for (int i = 0; i < racingCount; i++) {
-            for (RacingCar racingCar : racingCars) {
-                int randomNumber = randomNumberGenerator.getRandomNumber();
-                if (randomNumber >= 4) {
-                    racingCar.move();
-                }
-            }
+            racingCars.move(randomNumberGenerator);
             resultViewer.getCurrentPosition(racingCars);
             System.out.println();
         }
     }
 
-    private static List<RacingCar> createRacingCars(int carCount) {
+    private static RacingCars createRacingCars(List<CarName> carNames) {
         List<RacingCar> racingCars = new ArrayList<>();
 
-        for (int i = 0; i < carCount; i++) {
-            racingCars.add(new RacingCar());
+        for (CarName carName : carNames) {
+            racingCars.add(new RacingCar(carName));
         }
-        return racingCars;
+        return new RacingCars(racingCars);
     }
 }
