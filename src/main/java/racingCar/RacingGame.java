@@ -9,11 +9,13 @@ public class RacingGame {
     private static InputScanner inputScanner = new InputScanner();
     private static ResultViewer resultViewer = new ResultViewer();
     private static RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
+
     public static void main(String[] args) {
         List<CarName> carNames = inputScanner.getCarNames();
         int racingCount = inputScanner.getRacingCount();
         RacingCars racingCars = createRacingCars(carNames);
         startRacing(racingCars, racingCount);
+        resultViewer.printWinners(racingCars);
     }
 
     private static void startRacing(RacingCars racingCars, int racingCount) {

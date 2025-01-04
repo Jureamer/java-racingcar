@@ -37,4 +37,24 @@ public class RacingCars {
             }
         }
     }
+
+    public List<String> getCarNames() {
+        List<String> carNames = new ArrayList<>();
+        for (RacingCar racingCar : racingCars) {
+            carNames.add(racingCar.getName());
+        }
+        return carNames;
+    }
+
+    public List<Integer> getSteps() {
+        List<Integer> steps = new ArrayList<>();
+        for (RacingCar racingCar : racingCars) {
+            steps.add(racingCar.getGo());
+        }
+        return steps;
+    }
+
+    public int size() {
+        return racingCars.size();
+    }
 }
