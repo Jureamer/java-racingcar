@@ -1,8 +1,8 @@
-package racingCar;
+package racingCar.domain;
 
 public class CarName {
     public static final int LIMIT_CAR_NAME_LENGTH = 5;
-    String CAR_NAME;
+    private String CAR_NAME;
 
     public CarName(String CAR_NAME) {
         if (CAR_NAME.length() > LIMIT_CAR_NAME_LENGTH) {

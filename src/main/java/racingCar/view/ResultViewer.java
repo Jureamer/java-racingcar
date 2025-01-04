@@ -1,15 +1,17 @@
-package racingCar;
+package racingCar.view;
+
+import racingCar.domain.RacingCar;
+import racingCar.domain.RacingCars;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ResultViewer {
     public void getCurrentPosition(RacingCars racingCars) {
-        List<String> carNames = racingCars.getCarNames();
-        List<Integer> carGoes = racingCars.getSteps();
-        for (int i = 0; i < racingCars.size(); i++) {
-            System.out.print(carNames.get(i) + " : ");
-            System.out.print("-".repeat(carGoes.get(i)));
+        for (RacingCar racingCar : racingCars) {
+            int position = racingCar.getPosition();
+            System.out.print(racingCar.getName() + " : ");
+            System.out.print("-".repeat(position));
             System.out.println();
         }
     }
