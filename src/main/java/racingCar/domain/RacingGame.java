@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.Map;
 
 public class RacingGame {
-    private int racingCount;
+    private RacingCount racingCount;
     private RacingCars racingCars;
 
-    public RacingGame(List<CarName> carNames, int racingCount) {
+    public RacingGame(List<CarName> carNames, RacingCount racingCount) {
         this.racingCount = racingCount;
         this.racingCars = createRacingCars(carNames);
     }
@@ -25,15 +25,14 @@ public class RacingGame {
     }
 
     public boolean isEnd() {
-        return racingCount == 0;
+        return racingCount.isEnd();
     }
 
     public void move(MoveStrategy moveStrategy) {
         for (RacingCar racingCar : racingCars) {
             racingCar.move(moveStrategy);
         }
-
-        racingCount--;
+        racingCount.decreateCount();
     }
 
     public Map<String, Integer> getCurrentPositions() {

@@ -27,5 +27,6 @@ public class ResultViewer {
             System.out.print("-".repeat(position));
             System.out.println();
         }
+        System.out.println();
     }
 }

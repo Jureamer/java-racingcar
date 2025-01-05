@@ -1,6 +1,7 @@
 package racingCar.view;
 
 import racingCar.domain.CarName;
+import racingCar.domain.RacingCount;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,22 +36,12 @@ public class InputScanner {
         return number;
     }
 
-    public static int getRacingCount() {
+    public static RacingCount getRacingCount() {
         System.out.println("시도할 횟수는 몇 회인가요?");
         String input = scanner.nextLine();
 
         int number = checkRacingCountNumeric(input);
-        number = checkProperRacingCount(number);
-        return number;
-
-    }
-
-    private static int checkProperRacingCount(int number) {
-        while (number > LIMIT_CAR_COUNT) {
-            System.out.println("시도할 횟수는 " + LIMIT_RACING_COUNT + "회 이하로 입력해주세요.");
-            number = scanner.nextInt();
-        }
-        return number;
+        return new RacingCount(number);
     }
 
     private static int checkProperCarCount(int number) {

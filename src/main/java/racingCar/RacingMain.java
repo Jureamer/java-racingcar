@@ -1,6 +1,7 @@
 package racingCar;
 
 import racingCar.domain.CarName;
+import racingCar.domain.RacingCount;
 import racingCar.domain.RacingGame;
 import racingCar.domain.strategy.MoveStrategy;
 import racingCar.domain.strategy.RandomMoveStrategy;
@@ -14,7 +15,7 @@ public class RacingMain {
 
     public static void main(String[] args) {
         List<CarName> carNames = InputScanner.getCarNames();
-        int racingCount = InputScanner.getRacingCount();
+        RacingCount racingCount = InputScanner.getRacingCount();
         RacingGame racingGame = new RacingGame(carNames, racingCount);
         startRacing(racingGame);
         ResultViewer.printWinners(racingGame);

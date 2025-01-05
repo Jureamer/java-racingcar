@@ -3,9 +3,6 @@ package racingCar.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import racingCar.domain.CarName;
-import racingCar.domain.RacingCar;
-import racingCar.domain.RacingGame;
 import racingCar.domain.strategy.MoveStrategy;
 
 import java.util.Arrays;
@@ -30,7 +27,7 @@ public class RacingGameTest {
     @Test
     @DisplayName("게임 종료 여부 테스트")
     public void testIsEnd() {
-        RacingGame racingGame = new RacingGame(carNames, 1);
+        RacingGame racingGame = new RacingGame(carNames, new RacingCount(1));
         assertThat(racingGame.isEnd()).isFalse();
         racingGame.move(moveStrategy);
         assertThat(racingGame.isEnd()).isTrue();
@@ -40,7 +37,7 @@ public class RacingGameTest {
     @DisplayName("자동차 이동 테스트")
     public void testMove() {
         when(moveStrategy.isMovable()).thenReturn(true);
-        RacingGame racingGame = new RacingGame(carNames, 1);
+        RacingGame racingGame = new RacingGame(carNames, new RacingCount(1));
         racingGame.move(moveStrategy);
 
         Map<String, Integer> positions = racingGame.getCurrentPositions();
@@ -53,7 +50,7 @@ public class RacingGameTest {
     @Test
     @DisplayName("현재 위치 가져오기 테스트")
     public void testGetCurrentPositions() {
-        RacingGame racingGame = new RacingGame(carNames, 1);
+        RacingGame racingGame = new RacingGame(carNames, new RacingCount(1));
         Map<String, Integer> positions = racingGame.getCurrentPositions();
 
         assertThat(positions).hasSize(3);
@@ -66,7 +63,7 @@ public class RacingGameTest {
     @DisplayName("우승자 가져오기 테스트")
     public void testGetWinners() {
         when(moveStrategy.isMovable()).thenReturn(true);
-        RacingGame racingGame = new RacingGame(carNames, 1);
+        RacingGame racingGame = new RacingGame(carNames, new RacingCount(1));
         racingGame.move(moveStrategy);
 
         List<RacingCar> winners = racingGame.getWinners();
