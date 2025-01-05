@@ -8,6 +8,6 @@ public class RandomMoveStrategy implements MoveStrategy {
 
     @Override
     public boolean isMovable() {
-        return (int) (RandomNumberGenerator.generateNumber(RANDOM_BOUND)) >= MOVE_CONDITION;
+        return RandomNumberGenerator.generateNumber(RANDOM_BOUND) >= MOVE_CONDITION;
     }
 }

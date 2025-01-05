@@ -10,8 +10,9 @@ public class InputScanner {
     public static final int LIMIT_CAR_COUNT = 9;
     private static final int LIMIT_RACING_COUNT = 9;
     private static final String CAR_NAME_DELIMITER = ",";
-    Scanner scanner = new Scanner(System.in);
-    public List<CarName> getCarNames() {
+    private static Scanner scanner = new Scanner(System.in);
+
+    public static List<CarName> getCarNames() {
         System.out.println("경주할 자동차 이름을 입력하세요(이름은 쉼표(,)를 기준으로 구분).");
         String input = scanner.nextLine();
         String[] carNamesArray = input.split(CAR_NAME_DELIMITER);
@@ -25,7 +26,7 @@ public class InputScanner {
         return carNames;
     }
 
-    public int getCarCount() {
+    public static int getCarCount() {
         System.out.println("자동차 대수는 몇 대인가요?");
         String input = scanner.nextLine();
 
@@ -34,7 +35,7 @@ public class InputScanner {
         return number;
     }
 
-    public int getRacingCount() {
+    public static int getRacingCount() {
         System.out.println("시도할 횟수는 몇 회인가요?");
         String input = scanner.nextLine();
 
@@ -44,7 +45,7 @@ public class InputScanner {
 
     }
 
-    private int checkProperRacingCount(int number) {
+    private static int checkProperRacingCount(int number) {
         while (number > LIMIT_CAR_COUNT) {
             System.out.println("시도할 횟수는 " + LIMIT_RACING_COUNT + "회 이하로 입력해주세요.");
             number = scanner.nextInt();
@@ -52,7 +53,7 @@ public class InputScanner {
         return number;
     }
 
-    private int checkProperCarCount(int number) {
+    private static int checkProperCarCount(int number) {
         while (number > LIMIT_RACING_COUNT) {
             System.out.println("자동차 대수는 " + LIMIT_CAR_COUNT + "대 이하로 입력해주세요.");
             number = scanner.nextInt();
@@ -60,7 +61,7 @@ public class InputScanner {
         return number;
     }
 
-    private int checkRacingCountNumeric(String input) {
+    private static int checkRacingCountNumeric(String input) {
         while (!isNumeric(input)) {
             System.out.println("횟수는 + " + LIMIT_RACING_COUNT + "회 이하의 숫자로 입력해주세요.");
             input = scanner.nextLine();
@@ -68,7 +69,7 @@ public class InputScanner {
         return Integer.parseInt(input);
     }
 
-    private int checkCarCountNumeric(String input) {
+    private static int checkCarCountNumeric(String input) {
         while (!isNumeric(input)) {
             System.out.println("자동차 대수는 + " + LIMIT_CAR_COUNT + "대 이하의 숫자로 입력해주세요.");
             input = scanner.nextLine();

@@ -1,31 +1,31 @@
 package racingCar.view;
 
+import racingCar.domain.RacingGame;
 import racingCar.domain.RacingCar;
-import racingCar.domain.RacingCars;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ResultViewer {
-    public void getCurrentPosition(RacingCars racingCars) {
-        for (RacingCar racingCar : racingCars) {
-            int position = racingCar.getPosition();
-            System.out.print(racingCar.getName() + " : ");
-            System.out.print("-".repeat(position));
-            System.out.println();
-        }
-    }
-
-    public void printWinners(RacingCars racingCars) {
-        String winnersMessage = createWinnersMessage(racingCars);
+    public static void printWinners(RacingGame racingGame) {
+        String winnersMessage = createWinnersMessage(racingGame.getWinners());
         System.out.println(winnersMessage);
     }
 
-    private String createWinnersMessage(RacingCars racingCars) {
-        List<RacingCar> winners = racingCars.getWinners();
+    private static String createWinnersMessage(List<RacingCar> winners) {
         String winnerNames = winners.stream()
                 .map(RacingCar::getName)
                 .collect(Collectors.joining(", "));
         return winnerNames + "가 우승했습니다.";
+    }
+
+    public static void printPositions(Map<String, Integer> currentPositions) {
+        for (String name : currentPositions.keySet()) {
+            int position = currentPositions.get(name);
+            System.out.print(name + " : ");
+            System.out.print("-".repeat(position));
+            System.out.println();
+        }
     }
 }

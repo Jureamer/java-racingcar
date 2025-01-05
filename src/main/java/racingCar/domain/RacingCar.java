@@ -1,6 +1,6 @@
 package racingCar.domain;
 
-import racingCar.domain.strategy.RandomMoveStrategy;
+import racingCar.domain.strategy.MoveStrategy;
 
 public class RacingCar {
     private Position position;
@@ -16,7 +16,7 @@ public class RacingCar {
         this.position = position;
     }
 
-    public void move(RandomMoveStrategy moveStrategy) {
+    public void move(MoveStrategy moveStrategy) {
         if (moveStrategy.isMovable()) {
             position.move();
         };
