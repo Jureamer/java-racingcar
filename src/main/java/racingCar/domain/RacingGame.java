@@ -3,7 +3,6 @@ package racingCar.domain;
 import racingCar.domain.strategy.MoveStrategy;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,9 +17,11 @@ public class RacingGame {
 
     private RacingCars createRacingCars(List<CarName> carNames) {
         List<RacingCar> racingCars = new ArrayList<>();
-        for (CarName carName : carNames) {
-            racingCars.add(new RacingCar(carName));
-        }
+
+        carNames.stream()
+                .map(RacingCar::new)
+                .forEach(racingCars::add);
+
         return new RacingCars(racingCars);
     }
 
@@ -29,19 +30,12 @@ public class RacingGame {
     }
 
     public void move(MoveStrategy moveStrategy) {
-        for (RacingCar racingCar : racingCars) {
-            racingCar.move(moveStrategy);
-        }
+        racingCars.move(moveStrategy);
         racingCount.decreateCount();
     }
 
     public Map<String, Integer> getCurrentPositions() {
-        Map<String, Integer> currentPositions = new HashMap<>();
-
-        for (RacingCar racingCar : racingCars) {
-            currentPositions.put(racingCar.getName(), racingCar.getPosition());
-        }
-        return currentPositions;
+        return racingCars.getCurrentPositions();
     }
 
     public List<RacingCar> getWinners() {

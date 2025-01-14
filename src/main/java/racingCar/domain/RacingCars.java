@@ -1,10 +1,11 @@
 package racingCar.domain;
 
-import racingCar.domain.strategy.RandomMoveStrategy;
+import racingCar.domain.strategy.MoveStrategy;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class RacingCars implements Iterable<RacingCar> {
     private List<RacingCar> racingCars;
@@ -14,30 +15,28 @@ public class RacingCars implements Iterable<RacingCar> {
     }
 
     public List<RacingCar> getWinners() {
-        int max_position = -1;
-        List<RacingCar> winners = new ArrayList<>();
+        int largestPosition = racingCars.stream()
+                .map(RacingCar::getPosition)
+                .max(Integer::compareTo)
+                .orElseThrow();
 
-        for (RacingCar racingCar : racingCars) {
-            int go = racingCar.getPosition();
-            if (go > max_position) {
-                max_position = go;
-                winners.clear();
-                winners.add(racingCar);
-            } else if (racingCar.getPosition() == max_position) {
-                winners.add(racingCar);
-            }
-        }
-        return winners;
+        return racingCars.stream()
+                .filter(racingCar -> racingCar.getPosition() == largestPosition)
+                .collect(Collectors.toList());
     }
 
-    public void move(RandomMoveStrategy randomMoveStrategy) {
-        for (RacingCar racingCar : racingCars) {
-            racingCar.move(randomMoveStrategy);
-        }
+    public void move(MoveStrategy randomMoveStrategy) {
+        racingCars.forEach(racingCar -> racingCar.move(randomMoveStrategy));
     }
 
     @Override
     public Iterator<RacingCar> iterator() {
         return racingCars.iterator();
     }
+
+    public Map<String, Integer> getCurrentPositions() {
+        return racingCars.stream()
+            .collect(Collectors.toMap(RacingCar::getName, RacingCar::getPosition));
+    }
+
 }
